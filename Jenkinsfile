@@ -2,16 +2,12 @@ pipeline {
     agent none
     stages {
         stage('Example Build') {
-            agent {any} 
+            agent {
+               label 'slave_1'	
+               }
             steps {
                 echo 'Hello, Maven'                
             }
-        }
-        stage('Example Test') {
-            agent {any} 
-            steps {
-                echo 'Hello, JDK'                
-            }
-        }
+        }      
     }
 }
