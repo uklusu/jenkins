@@ -2,13 +2,13 @@ pipeline {
     agent none
     stages {
         stage('Example Build') {
-            agent {slave_1} 
+            agent {any} 
             steps {
                 echo 'Hello, Maven'                
             }
         }
         stage('Example Test') {
-            agent {slave_1} 
+            agent {any} 
             steps {
                 echo 'Hello, JDK'                
             }
