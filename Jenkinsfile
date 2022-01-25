@@ -1,13 +1,21 @@
+#!groovy
 pipeline {
-    agent none
+    agent any 
     stages {
-        stage('Example Build') {
-            agent {
-               label 'slave_1'	
-               }
+        stage('Build') { 
             steps {
-                echo 'Hello, Maven'                
+                echo "hello world"
             }
-        }      
+        }
+        stage('Test') { 
+            steps {
+               echo "hello world"
+            }
+        }
+        stage('Deploy') { 
+            steps {
+                echo "hello world"
+            }
+        }
     }
 }
