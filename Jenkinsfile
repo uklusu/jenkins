@@ -1,18 +1,20 @@
 #!groovy
 pipeline {
-    agent any 
+    agent any
     stages {
-        stage('Build') { 
+        stage('Build_server') {
             steps {
-                echo "hello world"
+                terraform init
+                terraform apply
+                terraform output | tr -d webserver_public_ip_adress|tr -d \" | tr -d = > ip
             }
         }
-        stage('Test') { 
+        stage('Test') {
             steps {
                echo "hello world"
             }
         }
-        stage('Deploy') { 
+        stage('Deploy') {
             steps {
                 echo "hello world"
             }
