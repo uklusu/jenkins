@@ -10,7 +10,7 @@ pipeline {
                    sudo apt-get update && sudo apt-get install terraform
                    terraform init
                    terraform apply -auto-approve
-                   terraform output | tr -d webserver_public_ip_adress | tr -d \" | tr -d = > "ip"
+                   terraform output | tr -d webserver_public_ip_adress | tr -d \\" | tr -d = > ip
                 '''
                 echo "hello world"
 
