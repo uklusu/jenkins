@@ -9,7 +9,7 @@ pipeline {
                    sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main" -y
                    sudo apt-get update && sudo apt-get install terraform -y
                    terraform init
-                   terraform apply -yes
+                   terraform apply -auto-approve
                    terraform output | tr -d webserver_public_ip_adress|tr -d \" | tr -d = > ip
                 '''
 
