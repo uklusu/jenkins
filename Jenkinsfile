@@ -4,10 +4,13 @@ pipeline {
     stages {
         stage('Build_server') {
             steps {
-                terraform init
-                terraform apply
-                terraform output | tr -d webserver_public_ip_adress|tr -d \" | tr -d = > ip
-              }
+                bash ```
+                   #!/bin/bash
+                   terraform init
+                   terraform apply
+                   terraform output | tr -d webserver_public_ip_adress|tr -d \" | tr -d = > ip
+                ```
+              
             }
         }
         stage('Test') {
