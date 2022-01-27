@@ -7,6 +7,7 @@ pipeline {
                 terraform init
                 terraform apply
                 terraform output | tr -d webserver_public_ip_adress|tr -d \" | tr -d = > ip
+              }
             }
         }
         stage('Test') {
