@@ -4,8 +4,7 @@ pipeline {
     stages {
         stage('Build_server') {
             steps {
-                bash '''
-                   #!/bin/bash
+                sh ''' #!/bin/bash
                    terraform init
                    terraform apply
                    terraform output | tr -d webserver_public_ip_adress|tr -d \" | tr -d = > ip
