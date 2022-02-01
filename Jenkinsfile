@@ -24,13 +24,13 @@ pipeline {
           }
             steps {
               sh ''' #!/bin
-               sudo su
+               
                sudo chmod 777 shop.sh
                sudo chmod 777 drop
                sudo chmod 777 php
                sudo chmod 777 default
                ip_add= cat ip ;    scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/drop ubuntu@$IP_ADD:/home/ubuntu/
-               scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/php ubuntu@$IP_ADD:/home/ubuntu/
+              sudo scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/php ubuntu@$IP_ADD:/home/ubuntu/
                scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/default ubuntu@$IP_ADD:/home/ubuntu/
                scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/shop.sh ubuntu@$IP_ADD:/home/ubuntu/
                ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa sudo  mv default /etc/nginx/sites-available
