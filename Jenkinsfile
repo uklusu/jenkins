@@ -21,8 +21,7 @@ pipeline {
             }
         }
         stage('Test') {
-            steps {
-              with(credentials: 'aws_key'){
+            steps {          
               sh ''' #!/bin
 
                sudo chmod 777 shop.sh
@@ -32,7 +31,7 @@ pipeline {
                ip_add= cat ip ; echo $ip_ad ;  scp -i $aws_ssh drop ubuntu@$ip_add:/home/ubuntu/drop
 
                '''
-            }
+
           }
         }
         stage('Deploy') {
