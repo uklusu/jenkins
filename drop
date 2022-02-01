@@ -1,0 +1,11 @@
+# no access log for these guys
+location = /favicon.ico { access_log off; log_not_found off; }	
+location = /robots.txt { access_log off; log_not_found off; }
+ 
+# deny to all .invisible files 
+location ~ /\. { deny  all; access_log off; log_not_found off; }
+
+# deny all system files
+location ~ (\.dat|\.tpl|\.php|\.inc|\.log|\.cfg|\.lock|\.gz|\.zip)$ {
+  deny all;
+}

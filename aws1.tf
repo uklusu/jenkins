@@ -1,7 +1,5 @@
 provider "aws" {
-  access_key = "AKIAZDJXH2MJLTHQHDFD"
-  secret_key = "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"
-  region     = "us-east-2"
+  region = "us-east-2"
 }
 
 
@@ -9,20 +7,42 @@ provider "aws" {
 
 
 resource "aws_instance" "project_serv" {
-  ami                    = "ami-0fb653ca2d3203ac1"
-  instance_type          = "t2.micro"
+
+  ami           = "ami-0fb653ca2d3203ac1"
+  instance_type = "t2.micro"
+  ebs_block_device {
+    device_name = "/dev/sda1"
+    volume_size = 10
+  }
   key_name               = "id_rsa"
+  availability_zone      = "us-east-2a"
   vpc_security_group_ids = [aws_security_group.webserver.id]
   user_data              = <<EOF
 #!/bin/bash
 echo "project" > /etc/hostname
 apt-get update && apt-get upgrade -y
 add-apt-repository ppa:ondrej/php -y
-apt-get install nginx php7.4-fpm php7.4-cli php7.4-mbstring php7.4-json php7.4-intl php7.4-intl php7.4-curl php7.4-xml php7.4-gd php7.4-mcrypt php-memcache php-mysql php7.4-xmlrpc php-imagick mariadb-server memcached htop sysstat zip php-memcached php-memcache supervisor screen snapd -y
+apt-get install nginx php7.4-fpm php7.4-cli php7.4-mbstring php7.4-json php7.4-intl php7.4-intl php7.4-curl php7.4-xml php7.4-gd php7.4-mcrypt php-memcache php-mysql php7.4-xmlrpc php-imagick mariadb-server memcached htop sysstat zip php-memcached php-memcache supervisor screen snapd  php7.4-zip php7.4-apcu php7.4-mysqlnd -y
+sudo apt-get update
+sudo update-alternatives --set php /usr/bin/php7.4
+sudo apt-get install \
+   ca-certificates \
+   curl \
+   gnupg \
+   lsb-release
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo \
+ "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+ $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+ sudo apt-get update
+ sudo apt-get install docker-ce docker-ce-cli containerd.io -y
 
+ mysql -u root --password='' -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'duck'; flush privileges;"
+ rm /var/www/html/index.nginx-debian.html
 EOF
 
 }
+
 
 resource "aws_key_pair" "project" {
   key_name   = "id_rsa"
@@ -30,21 +50,11 @@ resource "aws_key_pair" "project" {
 
 }
 resource "aws_security_group" "webserver" {
-  name        = "webserversec"
-  description = "First_security"
+  name        = "websec"
+  description = "dyn_security"
 
-  ingress {
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+
+
   egress {
     from_port   = 0
     to_port     = 0
@@ -52,12 +62,16 @@ resource "aws_security_group" "webserver" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+  dynamic "ingress" {
+    for_each = ["80", "443", "8080", "22", "9093"]
+    content {
+      from_port   = ingress.value
+      to_port     = ingress.value
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
   }
+
   tags = {
     Name = "sec_group"
   }
