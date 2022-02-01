@@ -24,7 +24,7 @@ pipeline {
                sudo chmod 777 shop.sh
                sudo chmod 777 drop
                sudo chmod 777 php
-               sudo chmod 777 defailt
+               sudo chmod 777 default
                echo $ip_ad
                '''
             }
