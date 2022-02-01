@@ -20,7 +20,7 @@ pipeline {
         }
         stage('Test') {
           environment {
-            IP_ADD = cat ip
+            IP_ADD =  sh(returnStdout: true, script: "cat ip")
           }
             steps {
               sh ''' #!/bin
