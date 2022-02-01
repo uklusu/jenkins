@@ -39,7 +39,8 @@ echo \
 sudo apt install openssh-server
 sudo service ssh start
  mysql -u root --password='' -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'duck'; flush privileges;"
- rm /var/www/html/index.nginx-debian.html
+
+ sudo update-alternatives --set php /usr/bin/php7.4
 EOF
 
 }
@@ -64,7 +65,7 @@ resource "aws_security_group" "webserver" {
   }
 
   dynamic "ingress" {
-    for_each = ["80", "443", "8080", "22", "9093"]
+    for_each = ["80", "443", "8080", "22"]
     content {
       from_port   = ingress.value
       to_port     = ingress.value
