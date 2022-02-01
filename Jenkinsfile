@@ -1,9 +1,7 @@
 #!groovy
 pipeline {
     agent any
-    environment {
-      aws_key= credentials('aws_ssh')
-    }
+
     stages {
         stage('Build_server') {
             steps {
@@ -21,7 +19,10 @@ pipeline {
             }
         }
         stage('Test') {
-            steps {          
+          environment {
+            aws_key= credentials('aws_ssh')
+          }
+            steps {
               sh ''' #!/bin
 
                sudo chmod 777 shop.sh
