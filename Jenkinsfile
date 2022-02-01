@@ -26,6 +26,7 @@ pipeline {
                sudo chmod 777 php
                sudo chmod 777 defailt
                echo $ip_ad
+               '''
             }
         }
         stage('Deploy') {
