@@ -20,7 +20,7 @@ pipeline {
         stage('Test') {
             steps {
               sh ''' #!/bin
-               ip_ad = cat "ip"
+               ip_ad=cat "ip"
                sudo chmod 777 shop.sh
                sudo chmod 777 drop
                sudo chmod 777 php
