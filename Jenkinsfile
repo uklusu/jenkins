@@ -1,6 +1,8 @@
 #!groovy
 pipeline {
     agent any
+    environment {
+      aws_key= credentials('aws_ssh')
     stages {
         stage('Build_server') {
             steps {
@@ -19,15 +21,18 @@ pipeline {
         }
         stage('Test') {
             steps {
+              with(credentials: 'aws_key'){
               sh ''' #!/bin
-               ip_add= cat ip ; echo $ip_ad
+
                sudo chmod 777 shop.sh
                sudo chmod 777 drop
                sudo chmod 777 php
                sudo chmod 777 default
-               echo $ip_ad
+               ip_add= cat ip ; echo $ip_ad ;  scp -i $aws_ssh drop ubuntu@$ip_add:/home/ubuntu/drop
+
                '''
             }
+          }
         }
         stage('Deploy') {
             steps {
