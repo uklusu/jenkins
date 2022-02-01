@@ -20,7 +20,7 @@ pipeline {
         }
         stage('Test') {
           environment {
-            aws_key = credentials('aws_ssh')
+            IP_ADD = cat ip
           }
             steps {
               sh ''' #!/bin
@@ -29,7 +29,7 @@ pipeline {
                sudo chmod 777 drop
                sudo chmod 777 php
                sudo chmod 777 default
-               ip_add= cat ip ;    scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/drop ubuntu@$ip_add:/home/ubuntu/
+               ip_add= cat ip ;    scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/drop ubuntu@$IP_ADD:/home/ubuntu/
 
                '''
 
