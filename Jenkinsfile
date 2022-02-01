@@ -24,7 +24,7 @@ pipeline {
           }
             steps {
               sh ''' #!/bin
-
+               sudo su
                sudo chmod 777 shop.sh
                sudo chmod 777 drop
                sudo chmod 777 php
