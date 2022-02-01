@@ -36,7 +36,8 @@ echo \
  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
  sudo apt-get update
  sudo apt-get install docker-ce docker-ce-cli containerd.io -y
-
+sudo apt install openssh-server
+sudo service ssh start
  mysql -u root --password='' -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'duck'; flush privileges;"
  rm /var/www/html/index.nginx-debian.html
 EOF
