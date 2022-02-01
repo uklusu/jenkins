@@ -20,8 +20,8 @@ pipeline {
         }
         stage('Test') {
           environment {
-            aws_key= credentials('aws_ssh')
-          }
+            aws_key = credentials('aws_ssh')
+
             steps {
               sh ''' #!/bin
 
@@ -29,10 +29,10 @@ pipeline {
                sudo chmod 777 drop
                sudo chmod 777 php
                sudo chmod 777 default
-               ip_add= cat ip ; echo $ip_ad ;  scp -i $aws_ssh drop ubuntu@$ip_add:/home/ubuntu/drop
+               ip_add= cat ip ; echo $ip_ad ;  scp -i "$aws_ssh" drop ubuntu@$ip_add:/home/ubuntu/drop
 
                '''
-
+           }
           }
         }
         stage('Deploy') {
