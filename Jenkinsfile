@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build_server') {
             steps {
-              withAWS(credentials: 'aws_main', region: 'us-east-2')
+              withAWS(credentials: 'aws_main', region: 'us-east-2'){
                 sh ''' #!/bin/bash
                    Echo "hello_world"
                    curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
@@ -15,7 +15,7 @@ pipeline {
                    terraform output -raw  webserver_public_ip_adress > ip
                 '''
                 echo "hello world"
-
+              }
             }
         }
         stage('Test') {
