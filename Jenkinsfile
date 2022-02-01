@@ -29,7 +29,7 @@ pipeline {
                sudo chmod 777 drop
                sudo chmod 777 php
                sudo chmod 777 default
-               ip_add= cat ip ; echo $ip_ad ;  scp -i "$aws_ssh" ~/drop ubuntu@$ip_add:/home/ubuntu/drop
+               ip_add= cat ip ;  scp -i "$aws_ssh" $PWD/drop ubuntu@$ip_add:/home/ubuntu/drop
 
                '''
 
