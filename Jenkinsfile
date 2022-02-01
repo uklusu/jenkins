@@ -24,7 +24,7 @@ pipeline {
           }
             steps {
               sh ''' #!/bin
-               
+
                sudo chmod 777 shop.sh
                sudo chmod 777 drop
                sudo chmod 777 php
@@ -33,10 +33,10 @@ pipeline {
               sudo scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/php ubuntu@$IP_ADD:/home/ubuntu/
                scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/default ubuntu@$IP_ADD:/home/ubuntu/
                scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/shop.sh ubuntu@$IP_ADD:/home/ubuntu/
-               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa sudo  mv default /etc/nginx/sites-available
-              ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa sudo   mv drop /etc/nginx/conf.d/
-              ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa sudo   mv php /etc/nginx/conf.d/
-              ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa sudo ./shop.sh --app_dir=/var/www/html/ \
+               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo  mv default /etc/nginx/sites-available
+               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo   mv drop /etc/nginx/conf.d/
+               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo   mv php /etc/nginx/conf.d/
+               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo ./shop.sh --app_dir=/var/www/html/ \
                            --document_root=/var/www/html \
                            --db_server=localhost \
                            --db_username=root \
