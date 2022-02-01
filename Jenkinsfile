@@ -3,6 +3,7 @@ pipeline {
     agent any
     environment {
       aws_key= credentials('aws_ssh')
+    }
     stages {
         stage('Build_server') {
             steps {
@@ -40,5 +41,4 @@ pipeline {
             }
         }
     }
-}
 }
