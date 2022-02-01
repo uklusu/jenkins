@@ -5,7 +5,7 @@ pipeline {
         stage('Build_server') {
             steps {
               withAWS(credentials: 'aws_main', region: 'us-east-2'){
-                sh ''' #!/bin/bash                   
+                sh ''' #!/bin/bash
                    curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
                    sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
                    sudo apt-get update && sudo apt-get install terraform
@@ -19,7 +19,13 @@ pipeline {
         }
         stage('Test') {
             steps {
-               echo "hello world"
+              sh ''' #!/bin
+               ip_ad = cat "ip"
+               sudo chmod 777 shop.sh
+               sudo chmod 777 drop
+               sudo chmod 777 php
+               sudo chmod 777 defailt
+               echo $ip_ad
             }
         }
         stage('Deploy') {
