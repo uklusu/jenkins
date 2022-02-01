@@ -37,7 +37,7 @@ pipeline {
                ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo   mv default /etc/nginx/sites-available
                ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo   mv drop /etc/nginx/conf.d/
                ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo   mv php /etc/nginx/conf.d/
-               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo   php7.4-fpm
+               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo systemctl restart  php7.4-fpm
                ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo   nginx -s reload
                ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo ./shop.sh --app_dir=/var/www/html/ \
                            --document_root=/var/www/html \
