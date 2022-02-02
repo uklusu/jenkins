@@ -10,7 +10,7 @@ resource "aws_instance" "project_serv" {
 
   ami           = "ami-0fb653ca2d3203ac1"
   instance_type = "t2.micro"
-  }
+
   key_name               = "id_rsa"
   availability_zone      = "us-east-2a"
   vpc_security_group_ids = [aws_security_group.webserver.id]
@@ -22,6 +22,7 @@ add-apt-repository ppa:ondrej/php -y
 apt-get install nginx php7.4-fpm php7.4-cli php7.4-mbstring php7.4-json php7.4-intl php7.4-intl php7.4-curl php7.4-xml php7.4-gd php7.4-mcrypt php-memcache php-mysql php7.4-xmlrpc php-imagick mariadb-server memcached htop sysstat zip php-memcached php-memcache supervisor screen snapd  php7.4-zip php7.4-apcu php7.4-mysqlnd -y
 sudo apt-get update
 sudo update-alternatives --set php /usr/bin/php7.4
+
 sudo apt install openssh-server
 sudo service ssh start
  mysql -u root --password='' -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'duck'; flush privileges;"
