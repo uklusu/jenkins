@@ -66,7 +66,8 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo "hello world"
+              sh ''' #!/bin  cat  ip
+              ```
             }
         }
     }
