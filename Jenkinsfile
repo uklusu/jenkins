@@ -56,19 +56,7 @@ pipeline {
                            --admin_password=523274 \
                            --development_type=standard \
                            --db_collation=utf8mb4_unicode_ci
-                  ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa ubuntu@$IP_ADD sudo cd /var/www/html/install ; php install.php --app_dir=/var/www/html/ \
-             --document_root=/var/www/html \
-             --db_server=localhost \
-             --db_username=root \
-             --db_password=duck \
-             --db_database=mylitecartdb \
-             --db_prefix=lc_ \
-             --timezone=Europe/London \
-             --admin_folder=admin \
-             --admin_username=root \
-             --admin_password=523274 \
-             --development_type=standard \
-             --db_collation=utf8mb4_unicode_ci
+                ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa ubuntu@$IP_ADD sudo rm /var/www/html/index.nginx-debian.html
                 ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa ubuntu@$IP_ADD sudo service nginx restart
 
                '''
