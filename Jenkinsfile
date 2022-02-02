@@ -66,9 +66,10 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-              sh ''' #!/bin  cat  ip
+              sh ''' #!/bin/bash
+               cat  ip
               '''
-            }
+
             }
         }
     }
