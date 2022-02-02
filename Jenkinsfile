@@ -37,7 +37,9 @@ pipeline {
                ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo   mv default /etc/nginx/sites-available
                ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo   mv drop /etc/nginx/conf.d/
                ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo   mv php /etc/nginx/conf.d/
-               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo   nginx -s reload
+               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo nginx
+               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo nginx -s reload
+               
                sleep 10
                ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo ./shop.sh --app_dir=/var/www/html/ \
                            --document_root=/var/www/html \
@@ -53,7 +55,7 @@ pipeline {
                            --development_type=standard \
                            --db_collation=utf8mb4_unicode_ci
 
-                ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa buntu@$IP_ADD sudo service nginx restart
+                ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa ubuntu@$IP_ADD sudo service nginx restart
 
                '''
 
