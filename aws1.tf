@@ -10,9 +10,6 @@ resource "aws_instance" "project_serv" {
 
   ami           = "ami-0fb653ca2d3203ac1"
   instance_type = "t2.micro"
-  ebs_block_device {
-    device_name = "/dev/sda1"
-    volume_size = 10
   }
   key_name               = "id_rsa"
   availability_zone      = "us-east-2a"
@@ -25,17 +22,6 @@ add-apt-repository ppa:ondrej/php -y
 apt-get install nginx php7.4-fpm php7.4-cli php7.4-mbstring php7.4-json php7.4-intl php7.4-intl php7.4-curl php7.4-xml php7.4-gd php7.4-mcrypt php-memcache php-mysql php7.4-xmlrpc php-imagick mariadb-server memcached htop sysstat zip php-memcached php-memcache supervisor screen snapd  php7.4-zip php7.4-apcu php7.4-mysqlnd -y
 sudo apt-get update
 sudo update-alternatives --set php /usr/bin/php7.4
-sudo apt-get install \
-   ca-certificates \
-   curl \
-   gnupg \
-   lsb-release
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-echo \
- "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
- $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
- sudo apt-get update
- sudo apt-get install docker-ce docker-ce-cli containerd.io -y
 sudo apt install openssh-server
 sudo service ssh start
  mysql -u root --password='' -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'duck'; flush privileges;"

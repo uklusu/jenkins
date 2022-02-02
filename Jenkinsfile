@@ -43,7 +43,7 @@ pipeline {
                ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo nginx -s reload
 
                sleep 10
-               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo ./shop.sh --app_dir=/var/www/html/ \
+               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo su ./shop.sh --app_dir=/var/www/html/ \
                            --document_root=/var/www/html \
                            --db_server=localhost \
                            --db_username=root \
