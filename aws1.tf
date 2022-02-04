@@ -22,7 +22,7 @@ sudo apt install openssh-server
 sudo service ssh start
 sudo apt-get update
 sudo update-alternatives --set php /usr/bin/php7.4
-sudo snap install docker -y
+
 sudo apt-get install \
   ca-certificates \
   curl \
