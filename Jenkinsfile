@@ -33,7 +33,7 @@ pipeline {
                sudo chmod 777 php
                sudo chmod 777 default
                sudo chmod 777 dock.sh
-               sleep 1m 15
+               sleep 2m
 
 
                ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD   mkdir /home/ubuntu/dock

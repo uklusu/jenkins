@@ -16,14 +16,13 @@ resource "aws_instance" "project_serv" {
   vpc_security_group_ids = [aws_security_group.webserver.id]
   user_data              = <<EOF
 #!/bin/bash
-echo "project" > /etc/hostname
 apt-get update && apt-get upgrade -y
 
 sudo apt install openssh-server
 sudo service ssh start
 sudo apt-get update
 sudo update-alternatives --set php /usr/bin/php7.4
-sudo snap install docker
+sudo snap install docker -y
 sudo apt-get install \
   ca-certificates \
   curl \
@@ -34,8 +33,8 @@ echo \
 "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
 $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update && apt-get upgrade -y
-sudo apt-get install docker-ce docker-ce-cli containerd.io
-sudo apt-get install docker.io
+sudo apt-get install docker-ce docker-ce-cli containerd.io -y
+sudo apt-get install docker.io -y
 EOF
 
 }
