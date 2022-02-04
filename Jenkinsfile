@@ -13,7 +13,7 @@ pipeline {
                    sudo  apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
                    sudo  apt-get update && sudo apt-get install terraform
                    terraform init
-                   terraform destroy -auto-approve
+                   
                    terraform apply -auto-approve
                    terraform output -raw  webserver_public_ip_adress > ip
 
