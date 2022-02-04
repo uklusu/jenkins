@@ -4,7 +4,7 @@ pipeline {
 
     stages {
         stage('Build_server') {
-        
+
             steps {
               withAWS(credentials: 'aws_main', region: 'us-east-2'){
                 sh ''' #!/bin/bash
@@ -47,7 +47,8 @@ pipeline {
                scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/dock.sh ubuntu@$IP_ADD:/home/ubuntu
 
                ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo docker build /home/ubuntu -t test
-               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo docker run -d -p 80:80 test
+               docker stop servs || true && docker rm servs || true
+               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo docker run -d -name servs -p 80:80 test
                '''
 
           }
