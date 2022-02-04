@@ -35,7 +35,7 @@ pipeline {
                sudo chmod 777 default
                sudo chmod 777 dock.sh
                echo "Za Warudo"
-               sleep 2m
+              
 
                scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/.dockerignore ubuntu@$IP_ADD:/home/ubuntu
 
@@ -47,7 +47,7 @@ pipeline {
                scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/dock.sh ubuntu@$IP_ADD:/home/ubuntu
 
                ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo docker build /home/ubuntu -t test
-               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD docker stop servs || true && docker rm servs || true
+               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD docker ps -q --filter "name=servs" | grep -q . && docker stop servs && docker rm  servs
                ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo docker run -d --name servs -p 80:80 test
                '''
 
