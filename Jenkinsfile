@@ -7,13 +7,14 @@ pipeline {
             steps {
               withAWS(credentials: 'aws_main', region: 'us-east-2'){
                 sh ''' #!/bin/bash
-                   curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-                   sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-                   sudo apt-get update && sudo apt-get install terraform
+                   curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo  apt-key add -
+                   sudo  apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+                   sudo  apt-get update && sudo apt-get install terraform
                    terraform init
 
                    terraform apply -auto-approve
                    terraform output -raw  webserver_public_ip_adress > ip
+
                 '''
                 echo "hello world"
               }
@@ -30,13 +31,13 @@ pipeline {
                sudo chmod 777 drop
                sudo chmod 777 php
                sudo chmod 777 default
-               sleep 3m
+               sleep 1m
               scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/drop ubuntu@$IP_ADD:/home/ubuntu/docker/
                scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/php ubuntu@$IP_ADD:/home/ubuntu/docker/
                scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/default ubuntu@$IP_ADD:/home/ubuntu/docker/
                scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/shop.sh ubuntu@$IP_ADD:/home/ubuntu/docker/
                scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/Dockerfile ubuntu@$IP_ADD:/home/ubuntu/docker/
-               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD docker build /home/ubuntu/docker/ -t test 
+               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD docker build /home/ubuntu/docker/ -t test
                ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD docker run -d -p 80:80 test
                '''
 
