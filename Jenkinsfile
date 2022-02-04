@@ -13,7 +13,7 @@ pipeline {
                    sudo  apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
                    sudo  apt-get update && sudo apt-get install terraform
                    terraform init
-                   
+
                    terraform apply -auto-approve
                    terraform output -raw  webserver_public_ip_adress > ip
 
@@ -47,7 +47,7 @@ pipeline {
                scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/dock.sh ubuntu@$IP_ADD:/home/ubuntu
 
                ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo docker build /home/ubuntu -t test
-               docker stop servs || true && docker rm servs || true
+               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD docker stop servs || true && docker rm servs || true
                ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo docker run -d --name servs -p 80:80 test
                '''
 
