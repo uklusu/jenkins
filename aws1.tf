@@ -25,6 +25,7 @@ sudo apt install openssh-server
 sudo service ssh start
 udo apt-get update
 sudo update-alternatives --set php /usr/bin/php7.4
+sudo snap install docker
 sudo apt-get install \
   ca-certificates \
   curl \
@@ -36,7 +37,7 @@ echo \
 $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io
-sudo snap install docker
+
 EOF
 
 }
