@@ -4,9 +4,7 @@ pipeline {
 
     stages {
         stage('Build_server') {
-          input{
-             message "Do you want to Build new instance with Terraform?"
-          }
+        
             steps {
               withAWS(credentials: 'aws_main', region: 'us-east-2'){
                 sh ''' #!/bin/bash
