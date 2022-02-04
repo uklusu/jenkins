@@ -11,7 +11,7 @@ pipeline {
                    sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
                    sudo apt-get update && sudo apt-get install terraform
                    terraform init
-                   terraform destroy -auto-approve
+
                    terraform apply -auto-approve
                    terraform output -raw  webserver_public_ip_adress > ip
                 '''
@@ -31,35 +31,13 @@ pipeline {
                sudo chmod 777 php
                sudo chmod 777 default
                sleep 3m
-              scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/drop ubuntu@$IP_ADD:/home/ubuntu/
-              sudo scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/php ubuntu@$IP_ADD:/home/ubuntu/
-               scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/default ubuntu@$IP_ADD:/home/ubuntu/
-               scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/shop.sh ubuntu@$IP_ADD:/home/ubuntu/
-               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo   mv default /etc/nginx/sites-available
-               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo   mv drop /etc/nginx/conf.d/
-               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo   mv php /etc/nginx/conf.d/
-               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo service nginx stop
-               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo service nginx start
-               sleep 5
-               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo nginx -s reload
-
-               sleep 10
-               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo  ./shop.sh --app_dir=/var/www/html/ \
-                           --document_root=/var/www/html \
-                           --db_server=localhost \
-                           --db_username=root \
-                           --db_password=duck \
-                           --db_database=mylitecartdb \
-                           --db_prefix=lc_ \
-                           --timezone=Europe/London \
-                           --admin_folder=admin \
-                           --admin_username=root \
-                           --admin_password=523274 \
-                           --development_type=standard \
-                           --db_collation=utf8mb4_unicode_ci
-                ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa ubuntu@$IP_ADD sudo rm /var/www/html/index.nginx-debian.html
-                ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa ubuntu@$IP_ADD sudo service nginx restart
-
+              scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/drop ubuntu@$IP_ADD:/home/ubuntu/docker/
+               scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/php ubuntu@$IP_ADD:/home/ubuntu/docker/
+               scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/default ubuntu@$IP_ADD:/home/ubuntu/docker/
+               scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/shop.sh ubuntu@$IP_ADD:/home/ubuntu/docker/
+               scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/Dockerfile ubuntu@$IP_ADD:/home/ubuntu/docker/
+               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD docker build /home/ubuntu/docker/ -t test 
+               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD docker run -d -p 80:80 test
                '''
 
           }
