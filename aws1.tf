@@ -25,7 +25,7 @@ sudo update-alternatives --set php /usr/bin/php7.4
 
 sudo apt install openssh-server
 sudo service ssh start
- sudo apt install docker.io
+ sudo apt install docker.io -y
 
  sudo update-alternatives --set php /usr/bin/php7.4
 EOF
