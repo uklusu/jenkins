@@ -10,7 +10,7 @@ pipeline {
                 sh ''' #!/bin/bash
                    sudo su
                    terraform apply -auto-approve
-                   terraform output -raw  webserver_public_ip_adress > /home/ubuntu/ip
+                   terraform output -raw  webserver_public_ip_adress > ip
 
                 '''
                 echo "hello world"
@@ -30,9 +30,10 @@ pipeline {
                sudo chmod 777 php
                sudo chmod 777 default
                sudo chmod 777 dock.sh
-               sudo chmod 777 check.sh
+
                #checking_if_server_is_up_and_little_jo_jo_reference_here_to_give_time_for_instaling_docker
-               sudo bash check.sh
+               echo "ZA WARUDO"
+               sleep 2m
 
 
 
