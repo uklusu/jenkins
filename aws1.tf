@@ -48,9 +48,16 @@ resource "aws_key_pair" "project" {
 resource "aws_security_group" "webserver" {
   name        = "websec"
   description = "dyn_security"
-
-
-
+  egress {
+    from_port = -1
+    to_port   = -1
+    protocol  = "icmp"
+  }
+  ingress {
+    from_port = -1
+    to_port   = -1
+    protocol  = "icmp"
+  }
   egress {
     from_port   = 0
     to_port     = 0
