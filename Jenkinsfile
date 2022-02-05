@@ -30,8 +30,9 @@ pipeline {
                sudo chmod 777 php
                sudo chmod 777 default
                sudo chmod 777 dock.sh
+               sudo chmod 777 check.sh
                #little_jo_jo_reference_here_to_give_time_for_instaling_docker
-               sudo ./check.sh
+               ./check.sh
 
 
                scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/.dockerignore ubuntu@$IP_ADD:/home/ubuntu
