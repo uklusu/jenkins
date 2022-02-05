@@ -13,7 +13,7 @@ pipeline {
                    sudo  apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
                    sudo  apt-get update && sudo apt-get install terraform
                    terraform init
-                   terraform destroy -auto-approve
+
                    terraform apply -auto-approve
                    terraform output -raw  webserver_public_ip_adress > ip
 
@@ -22,6 +22,7 @@ pipeline {
               }
             }
         }
+        #little_jo_jo_reference_here_to_give_time_for_instaling_docker
         stage('Test') {
           environment {
             IP_ADD =  sh(returnStdout: true, script: "cat ip")
@@ -34,6 +35,7 @@ pipeline {
                sudo chmod 777 php
                sudo chmod 777 default
                sudo chmod 777 dock.sh
+
                echo "ZA WARUDO"
                sleep 2m
 
