@@ -31,7 +31,7 @@ pipeline {
                sudo chmod 777 default
                sudo chmod 777 dock.sh
 
-               #little_jo_jo_reference_here_to_give_time_for_instaling_docker
+               #checking_if_server_is_up_and_little_jo_jo_reference_here_to_give_time_for_instaling_docker
                ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $IP_ADD; while test $? -gt 0; do echo "ZA WARUDO"; sleep 2m; ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $IP_ADD; done
 
 
