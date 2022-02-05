@@ -1,8 +1,9 @@
-ping $IP_ADD
+ip_ad= cat ip
+ping $ip_ad
 while test $? -gt 0
 do
 echo "ZA WARUDO"
 sleep 2m
 
-ping $IP_ADD
+ping $ip_ad
 done
