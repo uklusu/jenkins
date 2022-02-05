@@ -10,7 +10,7 @@ pipeline {
                 sh ''' #!/bin/bash
                    sudo su
                    terraform apply -auto-approve
-                   terraform output -raw  webserver_public_ip_adress > ip
+                   terraform output -raw  webserver_public_ip_adress > /home/ubuntu/ip
 
                 '''
                 echo "hello world"
