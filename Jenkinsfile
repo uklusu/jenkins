@@ -32,7 +32,7 @@ pipeline {
                sudo chmod 777 dock.sh
 
                #checking_if_server_is_up_and_little_jo_jo_reference_here_to_give_time_for_instaling_docker
-               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $IP_ADD |false && sleep 2m
+               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $IP_ADD |grep -q refused && sleep 2m
 
 
 
