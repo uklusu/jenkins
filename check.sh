@@ -1,4 +1,4 @@
-ip_ad= $(cat /home/ubuntu/ip )
+ip_ad= "$(cat /home/ubuntu/ip )"
 ping $ip_ad
 while test $? -gt 0
 do
