@@ -32,8 +32,7 @@ pipeline {
                sudo chmod 777 dock.sh
 
                #checking_if_server_is_up_and_little_jo_jo_reference_here_to_give_time_for_instaling_docker
-               echo "ZA WARUDO"
-               sleep 2m
+               ./ check.sh
 
 
 
