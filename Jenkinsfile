@@ -34,7 +34,7 @@ pipeline {
                sudo chmod 777 dock.sh
                sudo chmod 777 check.sh
                #checking_iff_server_is_up_and_little_jo_jo_reference_here_to_give_time_for_instaling_docker
-               sleep 2m
+               sudo bash check.sh
 
 
                echo "sending files"
