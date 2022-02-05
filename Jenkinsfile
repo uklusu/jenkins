@@ -22,7 +22,7 @@ pipeline {
               }
             }
         }
-        #little_jo_jo_reference_here_to_give_time_for_instaling_docker
+
         stage('Test') {
           environment {
             IP_ADD =  sh(returnStdout: true, script: "cat ip")
@@ -35,7 +35,7 @@ pipeline {
                sudo chmod 777 php
                sudo chmod 777 default
                sudo chmod 777 dock.sh
-
+               #little_jo_jo_reference_here_to_give_time_for_instaling_docker
                echo "ZA WARUDO"
                sleep 2m
 
