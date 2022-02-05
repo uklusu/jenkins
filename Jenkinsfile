@@ -32,8 +32,8 @@ pipeline {
                sudo chmod 777 dock.sh
 
                #little_jo_jo_reference_here_to_give_time_for_instaling_docker
-               ssh IP_ADD ; while test $? -gt 0 ; do ; echo "ZA WARUDO" ; sleep 2m ; ssh $IP_ADD ; done
-              
+               ssh IP_ADD; while test $? -gt 0; do; echo "ZA WARUDO"; sleep 2m; ssh $IP_ADD; done
+
 
 
                scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/.dockerignore ubuntu@$IP_ADD:/home/ubuntu
