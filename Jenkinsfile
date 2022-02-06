@@ -47,7 +47,7 @@ pipeline {
                ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo docker build /home/ubuntu -t test
 
 
-               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo docker run -d --name servs -p 80:80 test||true
+               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo docker run -d --name servs -p 80:80 test && echo "container start"
                ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo docker exec -it servs ./etc/nginx/shop.sh --app_dir=/var/www/html/ \
                             --document_root=/var/www/html \
                             --db_server=database.cfxybhsetvnk.us-east-2.rds.amazonaws.com \
