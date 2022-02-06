@@ -1,9 +1,7 @@
 #!groovy
 pipeline {
     agent any
-    triggers {
-        githubPush()
-      }
+
     stages {
         stage('Build_server') {
 
