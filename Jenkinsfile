@@ -10,10 +10,12 @@ pipeline {
             steps {
               withAWS(credentials: 'aws_main', region: 'us-east-2'){
                 sh ''' #!/bin/bash
-                   
+
                    terraform apply -auto-approve
                    terraform output -raw  webserver_public_ip_adress > /home/ubuntu/ip
-
+                   sudo chmod 777 check.sh
+                   #checking_server__and_little_jo_jo_reference_here_to_give_time_for_instaling_docker
+                   sudo bash check.sh
                 '''
                 echo "hello world"
               }
@@ -32,11 +34,6 @@ pipeline {
                sudo chmod 777 php
                sudo chmod 777 default
                sudo chmod 777 dock.sh
-               sudo chmod 777 check.sh
-               #checking_server__and_little_jo_jo_reference_here_to_give_time_for_instaling_docker
-               sudo bash check.sh
-
-
                echo "sending files"
                scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/.dockerignore ubuntu@$IP_ADD:/home/ubuntu
                scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/.dockerignore ubuntu@$IP_ADD:/home/ubuntu
@@ -51,7 +48,7 @@ pipeline {
 
 
                ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo docker run -d --name servs -p 80:80 test||true
-               docker exec -it servs ./etc/nginx/shop.sh --app_dir=/var/www/html/ \
+               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo docker exec -it servs ./etc/nginx/shop.sh --app_dir=/var/www/html/ \
                             --document_root=/var/www/html \
                             --db_server=database.cfxybhsetvnk.us-east-2.rds.amazonaws.com \
                             --db_username=root \
