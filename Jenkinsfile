@@ -22,7 +22,7 @@ pipeline {
             }
         }
 
-        stage('Test') {
+        stage('sending files') {
           environment {
             IP_ADD =  sh(returnStdout: true, script: "cat /home/ubuntu/ip")
           }
@@ -55,10 +55,18 @@ pipeline {
 
           }
         }
-        stage('Deploy') {
+        stage('creating docker container with demo website') {
+          environment {
+            IP_ADD =  sh(returnStdout: true, script: "cat /home/ubuntu/ip")
+          }
             steps {
               sh ''' #!/bin/bash
-               cat  ip
+              ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo docker build /home/ubuntu -t test
+
+              ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo docker build /home/ubuntu -t test
+
+              ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo  docker ps -q --filter "name=servs" |  grep -q . && ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo docker stop servs && ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo  docker rm  servs
+              ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo docker run -d --name servs -p 80:80 test
               '''
 
             }
