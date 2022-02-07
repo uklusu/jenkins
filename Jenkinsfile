@@ -61,7 +61,7 @@ pipeline {
                             --admin_password=523274 \
                             --development_type=standard \
                             --db_collation=utf8mb4_unicode_ci \
-                            -y
+                            
                '''
 
           }
