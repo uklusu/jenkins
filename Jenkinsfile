@@ -14,7 +14,7 @@ pipeline {
                    terraform apply -auto-approve
                    terraform output -raw  webserver_public_ip_adress > /home/ubuntu/ip
                    sudo chmod 777 check.sh
-                   #checking_server__and_little_jo_jo_reference_here_to_give_time_for_instaling_docker
+                   #server_check_and_little_jo_jo_reference_here_to_give_time_for_instaling_docker
                    sudo bash check.sh
                 '''
                 echo "hello world"
