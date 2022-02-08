@@ -19,7 +19,10 @@ resource "aws_instance" "project_serv" {
   user_data              = <<EOF
 #!/bin/bash
 apt-get update && apt-get upgrade -y
-
+apt-get update && apt-get upgrade -y
+add-apt-repository ppa:ondrej/php -y
+apt-get install nginx php7.4-fpm php7.4-cli php7.4-mbstring php7.4-json php7.4-intl php7.4-intl php7.4-curl php7.4-xml php7.4-gd php7.4-mcrypt php-memcache php-mysql php7.4-xmlrpc php-imagick mariadb-server memcached htop sysstat zip php-memcached php-memcache supervisor screen snapd  php7.4-zip php7.4-apcu php7.4-mysqlnd -y
+sudo apt-get update
 sudo apt install openssh-server
 sudo service ssh start
 sudo apt-get update

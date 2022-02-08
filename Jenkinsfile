@@ -13,7 +13,7 @@ pipeline {
 
                    terraform apply -auto-approve
                    terraform output -raw  webserver_public_ip_adress > /home/ubuntu/ip
-                   sleep 15
+                   sleep 10
                    sudo chmod 777 check.sh
                    #server_check_and_little_jo_jo_reference_here_to_give_time_for_instaling_docker
                    sudo bash check.sh
