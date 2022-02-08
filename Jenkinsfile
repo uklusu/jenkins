@@ -17,7 +17,7 @@ pipeline {
                    terraform output -raw  webserver_public_ip_adress > /home/ubuntu/ip
                    sudo chmod 777 check.sh
                    #little_jo_jo_reference_here_to_give_time_for_instaling_docker
-                   sleep 2 min
+                   sleep 2m
                 '''
                 echo "hello world"
               }
