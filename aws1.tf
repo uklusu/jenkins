@@ -3,7 +3,9 @@ provider "aws" {
 }
 
 
-
+resource "aws_eip" "static_ip" {
+  instance = aws_instance.project_serv.id
+}
 
 
 resource "aws_instance" "project_serv" {
