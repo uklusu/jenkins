@@ -12,7 +12,7 @@ pipeline {
                 sh ''' #!/bin/bash
                    terraform init
                    terraform apply -auto-approve
-                   sleep 5
+                   
                    terraform apply -auto-approve
                    terraform output -raw  webserver_public_ip_adress > /home/ubuntu/ip
                    sudo chmod 777 check.sh
@@ -59,7 +59,7 @@ pipeline {
               sh ''' #!/bin/bash
               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo docker build /home/ubuntu -t test
 
-            
+
 
               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo  docker ps -q --filter "name=servs" |  grep -q . && ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo docker stop servs && ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo  docker rm  servs
               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo docker run -d --name servs -p 80:80 test
