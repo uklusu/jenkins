@@ -15,19 +15,7 @@ RUN echo "daemon off;" >>/etc/nginx/nginx.conf
 COPY dock.sh /etc/nginx/dock.sh
 COPY shop.sh /etc/nginx/
 RUN service mysql start
-RUN ./etc/nginx/shop.sh --app_dir=/var/www/html/ \
-             --document_root=/var/www/html \
-             --db_server=database.cfxybhsetvnk.us-east-2.rds.amazonaws.com \
-             --db_username=root \
-             --db_password=database \
-             --db_database=mylitecartdb \
-             --db_prefix=lc_ \
-             --timezone=Europe/London \
-             --admin_folder=admin \
-             --admin_username=root \
-             --admin_password=523274 \
-             --development_type=standard \
-             --db_collation=utf8mb4_unicode_ci
+
 RUN service nginx stop
 RUN rm /var/www/html/index.nginx-debian.html
 
