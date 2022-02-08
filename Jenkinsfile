@@ -10,7 +10,7 @@ pipeline {
             steps {
               withAWS(credentials: 'aws_main', region: 'us-east-2'){
                 sh ''' #!/bin/bash
-
+                   terraform init
                    terraform apply -auto-approve
                    sleep 10
                    terraform output -raw  webserver_public_ip_adress > /home/ubuntu/ip
