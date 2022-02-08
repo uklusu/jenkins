@@ -44,7 +44,7 @@ pipeline {
                scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/shop.sh ubuntu@$IP_ADD:/home/ubuntu
                scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/Dockerfile ubuntu@$IP_ADD:/home/ubuntu
                scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/dock.sh ubuntu@$IP_ADD:/home/ubuntu
-               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD  ./home/ubuntu/shop.sh --app_dir=/var/www/html/ \
+               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD  bash /home/ubuntu/shop.sh --app_dir=/var/www/html/ \
              --document_root=/var/www/html \
              --db_server=database.cfxybhsetvnk.us-east-2.rds.amazonaws.com \
              --db_username=root \
