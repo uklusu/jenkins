@@ -67,7 +67,7 @@ pipeline {
               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo docker run -d --name servs -p 80:80 test
               '''
               sh '''
-                             export status=$(curl -o /dev/null -s -w "%{http_code}\n"$IP_ADD:80)
+                             export status=$(curl -o /dev/null -s -w "%{http_code}\n" http://$IP_ADD:80)
                              if [ status==200 ]
                              then
                              exit 0
