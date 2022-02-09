@@ -26,7 +26,7 @@ pipeline {
             }
         }
 
-        stage('sending files') {
+        stage('sending files_for_test') {
           environment {
             IP_ADD =  sh(returnStdout: true, script: "cat /home/ubuntu/iptest")
           }
@@ -74,7 +74,7 @@ pipeline {
         IP_PROD =  sh(returnStdout: true, script: "cat /home/ubuntu/ipprod")
       }
         steps {
-          sh '''ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD echo "hello_world"
+          sh '''ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_PROD echo "hello_world"
           '''
 
         }
