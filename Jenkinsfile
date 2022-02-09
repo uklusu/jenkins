@@ -14,7 +14,8 @@ pipeline {
                    terraform apply -auto-approve
                    sleep 5
                    terraform apply -auto-approve
-                   terraform output -raw  webserver_public_ip_adress > /home/ubuntu/ip
+                   terraform output -raw  test_server_ip > /home/ubuntu/iptest
+                   terraform output -raw  prod_server_ip > /home/ubuntu/ipprod
                    sudo chmod 777 check.sh
                    #little__jo_jo_reference_here_to_give_time_for_instaling_docker
                    echo "ZA WARUDO"
@@ -27,7 +28,7 @@ pipeline {
 
         stage('sending files') {
           environment {
-            IP_ADD =  sh(returnStdout: true, script: "cat /home/ubuntu/ip")
+            IP_ADD =  sh(returnStdout: true, script: "cat /home/ubuntu/iptest")
           }
             steps {
               sh ''' #!/bin
@@ -52,7 +53,7 @@ pipeline {
 
           }
         }
-        stage('creating docker container with demo website') {
+        stage('creating docker container with demo website on test') {
           environment {
             IP_ADD =  sh(returnStdout: true, script: "cat /home/ubuntu/ip")
           }
@@ -69,4 +70,15 @@ pipeline {
             }
         }
     }
+    stage('starting_demo_at_future_prod') {
+      environment {
+        IP_PROD =  sh(returnStdout: true, script: "cat /home/ubuntu/ipprod")
+      }
+        steps {
+          sh '''ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD echo "hello_world"
+          '''
+
+        }
+    }
+  }
 }

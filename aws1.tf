@@ -9,7 +9,7 @@ resource "aws_eip" "static_ip" {
 
 
 resource "aws_instance" "project_serv" {
-
+  count         = 2
   ami           = "ami-0fb653ca2d3203ac1"
   instance_type = "t2.micro"
 
@@ -84,6 +84,10 @@ resource "aws_security_group" "webserver" {
 }
 
 
-output "webserver_public_ip_adress" {
-  value = aws_instance.project_serv.public_ip
+
+output "test_server_ip" {
+  value = aws_instance.project_serv[1].public_ip
+}
+output "prod_server_ip" {
+  value = aws_instance.project_serv[0].public_ip
 }
