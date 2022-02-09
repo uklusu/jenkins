@@ -69,7 +69,6 @@ pipeline {
 
             }
         }
-    }
     stage('starting_demo_at_future_prod') {
       environment {
         IP_PROD =  sh(returnStdout: true, script: "cat /home/ubuntu/ipprod")
@@ -81,3 +80,4 @@ pipeline {
         }
     }
   }
+}
