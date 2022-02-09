@@ -41,12 +41,12 @@ pipeline {
                echo "sending files"
                scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/.dockerignore ubuntu@$IP_ADD:/home/ubuntu
                scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/.dockerignore ubuntu@$IP_ADD:/home/ubuntu
-               scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/drop ubuntu@$IP_ADD:/home/ubuntu
-               scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/php ubuntu@$IP_ADD:/home/ubuntu
-               scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/default ubuntu@$IP_ADD:/home/ubuntu
-               scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/shop.sh ubuntu@$IP_ADD:/home/ubuntu
-               scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/Dockerfile ubuntu@$IP_ADD:/home/ubuntu
-               scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/dock.sh ubuntu@$IP_ADD:/home/ubuntu
+               scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/drop          ubuntu@$IP_ADD:/home/ubuntu
+               scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/php           ubuntu@$IP_ADD:/home/ubuntu
+               scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/default       ubuntu@$IP_ADD:/home/ubuntu
+               scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/shop.sh       ubuntu@$IP_ADD:/home/ubuntu
+               scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/Dockerfile    ubuntu@$IP_ADD:/home/ubuntu
+               scp -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa $PWD/dock.sh       ubuntu@$IP_ADD:/home/ubuntu
 
 
                '''
@@ -55,7 +55,7 @@ pipeline {
         }
         stage('creating docker container with demo website on test') {
           environment {
-            IP_ADD =  sh(returnStdout: true, script: "cat /home/ubuntu/ip")
+            IP_ADD =  sh(returnStdout: true, script: "cat /home/ubuntu/iptest")
           }
             steps {
               sh ''' #!/bin/bash
