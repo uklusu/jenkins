@@ -5,10 +5,8 @@ RUN apt update \
     && add-apt-repository ppa:ondrej/php
 RUN  apt-get install nginx  php7.4-fpm php7.4-cli php7.4-mbstring php7.4-json php7.4-intl php7.4-intl php7.4-curl php7.4-xml php7.4-gd php7.4-mcrypt php-memcache php-mysql php7.4-xmlrpc php-imagick mariadb-server memcached htop sysstat zip php-memcached php-memcache supervisor screen snapd  php7.4-zip php7.4-apcu php7.4-mysqlnd  wget -y
 RUN  apt-get update
-RUN  apt-get install language-pack-en -y
-RUN  apt-get install locale-gen -y
-RUN  locale-gen en_US -y
-RUN  locale-gen en_US.UTF-8 -y
+RUN  apt-get install -y locales locales-all locale-gen en_US.UTF-8
+
 RUN  update-locale -y
 
 
