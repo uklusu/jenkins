@@ -66,17 +66,25 @@ pipeline {
               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo  docker ps -q --filter "name=servs" |  grep -q . && ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo docker stop servs && ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo  docker rm  servs
               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo docker run -d --name servs -p 80:80 test
               '''
-              sh '''
-                             export status=$(curl -o /dev/null -s -w "%{http_code}\n" http://$IP_ADD/index.php)
-                             if [ status==301 ]
-                             then
-                             exit 0
-                             else
-                             exit 1
-                             fi
-                             '''
+
             }
         }
+    stage('testing') {
+      environment {
+        IP_ADD =  sh(returnStdout: true, script: "cat /home/ubuntu/iptest")
+      }
+        steps {
+          sh '''
+                         export status=$(curl -o /dev/null -s -w "%{http_code}\n" http://$IP_ADD/index.php)
+                         if [ status==301 ]
+                         then
+                         exit 0
+                         else
+                         exit 1
+                         fi
+                         '''
+        }
+    }
     stage('starting_demo_at_future_prod') {
       environment {
         IP_PROD =  sh(returnStdout: true, script: "cat /home/ubuntu/ipprod")
