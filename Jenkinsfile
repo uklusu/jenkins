@@ -59,12 +59,15 @@ pipeline {
           }
             steps {
               sh ''' #!/bin/bash
-              ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo docker build /home/ubuntu -t test
+              ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo docker build /home/ubuntu -t uklusu/test
 
 
 
               ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo  docker ps -q --filter "name=servs" |  grep -q . && ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo docker stop servs && ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo  docker rm  servs
-              ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo docker run -d --name servs -p 80:80 test
+              ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo docker run -d --name servs -p 80:80 uklusu/test
+
+
+
               '''
 
             }
@@ -87,10 +90,16 @@ pipeline {
     }
     stage('starting_demo_at_future_prod') {
       environment {
+        IP_ADD =  sh(returnStdout: true, script: "cat /home/ubuntu/iptest")
         IP_PROD =  sh(returnStdout: true, script: "cat /home/ubuntu/ipprod")
       }
         steps {
-          sh '''ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_PROD echo "hello_world"
+          sh '''
+
+          ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo docker login -u uklusu -p 88888888q
+            ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo docker push uklusu/test
+            ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_PROD sudo docker run -dp 80:80 uklusu/test
+
           '''
 
         }

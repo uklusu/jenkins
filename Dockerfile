@@ -29,7 +29,7 @@ RUN ./etc/nginx/shop.sh --app_dir=/var/www/html/ \
              --db_password=database \
              --db_database=mylitecartdb \
              --db_prefix=lc_ \
-
+              --timezone=Europe\/London \
              --admin_folder=admin \
              --admin_username=root \
              --admin_password=523274 \
