@@ -98,7 +98,8 @@ pipeline {
 
           ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo docker login -u uklusu -p 88888888q
             ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_ADD sudo docker push uklusu/test
-            ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_PROD sudo docker run -dp 80:80 uklusu/test
+
+            ssh -o StrictHostKeyChecking=no -i /home/ubuntu/id_rsa  ubuntu@$IP_PROD sudo docker run  -d --name servs    -p 80:80 uklusu/test
 
           '''
 
