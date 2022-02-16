@@ -17,7 +17,7 @@ pipeline {
                    terraform output -raw  test_server_ip > /home/ubuntu/iptest
                    terraform output -raw  prod_server_ip > /home/ubuntu/ipprod
                    sudo chmod 777 check.sh
-                   #little__jo_jo_reference_here_to_give_time_for_instaling_docker
+                   #little_jo_jo_reference_here_to_give_time_for_instaling_docker
                    echo "ZA WARUDO"
                    sleep 2m
                 '''
