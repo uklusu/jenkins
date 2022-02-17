@@ -79,7 +79,7 @@ pipeline {
         steps {
           sh '''
                          export status=$(curl -o /dev/null -s -w "%{http_code}\n" http://$IP_ADD/index.php)
-                         if [ status==301 ]
+                         if [ $status -eq 301 ]
                          then
                          exit 0
                          else
