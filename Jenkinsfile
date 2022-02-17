@@ -18,7 +18,7 @@ pipeline {
                    terraform output -raw  prod_server_ip > /home/ubuntu/ipprod
                    sudo chmod 777 check.sh
                    #little_jo_jo_reference_here_to_give_time_for_instaling_docker
-                   echo "ZA WARUDO"
+                   echo "Z WARUDO"
                    sleep 2m
                 '''
                 echo "he world"
