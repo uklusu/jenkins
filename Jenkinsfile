@@ -21,7 +21,7 @@ pipeline {
                    echo "ZA WARUDO"
                    sleep 2m
                 '''
-                echo "hello world"
+                echo "he world"
               }
             }
         }
